@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,19 +45,21 @@ public class AkqaWorkPage extends BasePage {
         load();
     }
 
-    public void verifyImagesChangeSizeAccordinglyToBrowserWindow(int[] customBrowserWidths) {
+    @Step
+    public void verifyImagesChangeSizeAccordinglyToBrowserWindow(int[] customBrowserWidthsPx) {
         waitForVisibility(blockWorkFeed);
         assertTrue(isImageSizeCorrespondsBrowserSize(), "Images are not changing their size accordingly");
-        for (int i : customBrowserWidths) {
+        for (int i : customBrowserWidthsPx) {
             setWebDriverWindowSize(i, getWebDriverWindowsSize().getHeight());
             assertTrue(isImageSizeCorrespondsBrowserSize(), "Images are not changing their size accordingly");
         }
     }
 
-    public void verifyMenuChangesLayoutAccordinglyToBrowserWindow(int[] customBrowserWidths) {
+    @Step
+    public void verifyMenuChangesLayoutAccordinglyToBrowserWindow(int[] customBrowserWidthsPx) {
         waitForVisibility(horizontalMenuList);
         assertTrue(isMenuLayoutCorrespondsBrowserSize(), "Menu layout is not as expected");
-        for (int i : customBrowserWidths) {
+        for (int i : customBrowserWidthsPx) {
             setWebDriverWindowSize(i, getWebDriverWindowsSize().getHeight());
             assertTrue(isMenuLayoutCorrespondsBrowserSize(), "Menu layout is not as expected");
         }
@@ -67,6 +70,7 @@ public class AkqaWorkPage extends BasePage {
         int imageSizeWidth = 0;
         waitForVisibility(articleInViewImg);
         for (WebElement image : articleImages) {
+            waitForElementStopMoving(image);
             imageSizeWidth = image.getSize().getWidth();
             widths.add(imageSizeWidth);
         }

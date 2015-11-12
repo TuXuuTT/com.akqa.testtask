@@ -58,7 +58,7 @@ public final class WebDriverController {
 			 */
                 DesiredCapabilities firefoxCaps = DesiredCapabilities.firefox();
                 //List of constants: https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html#page-load-strategies-1/>
-                firefoxCaps.setCapability(CapabilityType.PAGE_LOADING_STRATEGY, "none");
+                firefoxCaps.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "none");
                 // https://code.google.com/p/selenium/wiki/DesiredCapabilities#Read-write_capabilities
                 firefoxCaps.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
                 FirefoxProfile profile = new FirefoxProfile();
