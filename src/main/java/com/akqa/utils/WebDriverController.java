@@ -34,7 +34,11 @@ public final class WebDriverController {
                  * need to set system property with path of chromedriver to make it working
                  * https://code.google.com/p/selenium/wiki/ChromeDriver#Getting_Started
                  */
-                String chromePath = String.format("%s/src/main/resources/chromedriver.exe", System.getProperty("user.dir"));
+                String chromeDriverName;
+                if (OSUtils.isWindows()) {
+                    chromeDriverName = "chromedriver.exe";
+                } else chromeDriverName = "chromedriver";
+                String chromePath = String.format("%s/src/main/resources/%s", System.getProperty("user.dir"), chromeDriverName);
                 System.setProperty("webdriver.chrome.driver", chromePath);
 
                 // http://stackoverflow.com/questions/13886430/passing-options-to-chrome-driver-selenium

@@ -23,9 +23,10 @@ public final class OSUtils {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    public static void killProcess(@NotNull String name) throws IllegalStateException {
+    public static void killProcess(@NotNull String name) {
         if (!isWindows()) {
-            throw new IllegalStateException("Method is not implemented for this OS");
+            log.debug("Method is not implemented for this OS");
+            return;
         }
         try {
             runCommand("taskkill", "/F", "/T", "/IM", name);
