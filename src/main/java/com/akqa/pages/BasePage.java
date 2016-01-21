@@ -1,5 +1,6 @@
 package com.akqa.pages;
 
+import com.akqa.utils.WebDriverController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -190,7 +191,7 @@ public abstract class BasePage {
     }
 
     public void maximizeWebdriverWindow() {
-        wd.manage().window().maximize();
+        WebDriverController.maximizeWindow(wd);
         try {
             Thread.sleep(2000L);
         } catch (InterruptedException e) {

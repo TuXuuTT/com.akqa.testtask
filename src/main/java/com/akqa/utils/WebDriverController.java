@@ -3,6 +3,8 @@ package com.akqa.utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -110,7 +112,20 @@ public final class WebDriverController {
 
         wd.manage().timeouts().pageLoadTimeout(DEFAULT_TIMEOUT_SEC, TimeUnit.SECONDS);
         wd.manage().timeouts().setScriptTimeout(DEFAULT_TIMEOUT_SEC, TimeUnit.SECONDS); //for async JavaScript
-        wd.manage().window().maximize();
+        maximizeWindow(wd);
         return wd;
+    }
+
+    public static void maximizeWindow(WebDriver wd) {
+        if (!OSUtils.isWindows()) {
+            java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            Point position = new Point(0, 0);
+            wd.manage().window().setPosition(position);
+            Dimension maximizedScreenSize =
+                    new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
+            wd.manage().window().setSize(maximizedScreenSize);
+        } else {
+            wd.manage().window().maximize();
+        }
     }
 }

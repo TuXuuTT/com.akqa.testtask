@@ -20,20 +20,20 @@ public class BaseTest implements IHookable {
     private static WebDriver wd = null;
     protected final Logger log = LogManager.getLogger(this);
 
+    protected static WebDriver getWdInstance() {
+        return wd;
+    }
+
     @BeforeClass
-    public  void beforeClass() {
+    public void beforeClass() {
         wd = WebDriverController.getDriver();
     }
 
     @AfterClass
-    public  void afterClass() {
+    public void afterClass() {
         if (wd != null) {
             wd.quit();
         }
-    }
-
-    protected static WebDriver getWdInstance() {
-        return wd;
     }
 
     @BeforeMethod()
